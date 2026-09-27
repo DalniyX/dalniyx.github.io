@@ -1,0 +1,431 @@
+/* ============================================================
+   DalniyX — данные сайта: ссылки, карточки проектов и все тексты.
+   Файл целиком генерируется Студией (studio/studio.py).
+   Внутри строгий JSON — правьте через Студию либо очень аккуратно руками.
+   ============================================================ */
+window.DX = {
+  "site": {
+    "brand": "DalniyX",
+    "brandSub": "Developer",
+    "defaultLang": "auto",
+    "snow": false,
+    "snowFrom": "",
+    "snowTo": "",
+    "showSupport": true
+  },
+  "links": {
+    "github": "https://github.com/dalniyx",
+    "telegram": "https://t.me/dalniyx",
+    "releases": "https://dalniyx.github.io/narrata-releases/",
+    "boosty": "https://boosty.to/dalniyx",
+    "patreon": "",
+    "donationalerts": "https://www.donationalerts.com/r/dalniyx",
+    "tbank": "",
+    "cloudtips": ""
+  },
+  "projects": [
+    {
+      "id": "narrata",
+      "status": "release",
+      "href": "",
+      "icon": "book",
+      "accent": "o",
+      "progress": null,
+      "cardStyle": "accordion",
+      "title": "Narrata",
+      "sub": {
+        "ru": "",
+        "en": ""
+      },
+      "text": {
+        "ru": "Рабочее место автора: сцены, персонажи, локации и хронология — в одном окне. Всё хранится локально, в читаемых файлах, и открывается за секунду.",
+        "en": "A writing desk for authors: scenes, characters, locations and timeline in one window. Everything is stored locally in readable files and opens in a second."
+      },
+      "details": {
+        "tagline": {
+          "ru": "Рабочее место автора —<br>вся история в одном окне.",
+          "en": "A writing desk —<br>the whole story in one window."
+        },
+        "lead": {
+          "ru": "Графы диалогов и сюжетных веток, карточки персонажей и локаций, переменные мира и симулятор сцен — Narrata держит всё это в одном проекте-папке на вашем диске: без аккаунта и без чужих серверов. Работает как приложение для Windows, в браузере и на Android; интерфейс — на русском и английском.",
+          "en": "Dialogue and quest graphs, character and location cards, world variables and a scene simulator — Narrata keeps it all in one project folder on your own drive, no account, no server. It runs as a Windows app, in the browser and on Android, with a bilingual Russian/English interface."
+        },
+        "features": [
+          {
+            "ru": "Редактор сцен",
+            "en": "Scene editor"
+          },
+          {
+            "ru": "Карточки персонажей",
+            "en": "Character cards"
+          },
+          {
+            "ru": "Хронология",
+            "en": "Timeline"
+          },
+          {
+            "ru": "Автосохранение",
+            "en": "Autosave"
+          }
+        ],
+        "externalUrl": "https://narrata.space/",
+        "externalLabel": {
+          "ru": "Перейти на сайт проекта",
+          "en": "Go to the project's website"
+        },
+        "enabled": true,
+        "layout": "cover",
+        "color": "",
+        "cover": "",
+        "version": "1.0",
+        "date": {
+          "ru": "",
+          "en": ""
+        },
+        "platforms": {
+          "ru": "Windows 10/11, Android, браузер",
+          "en": "Windows 10/11, Android, browser"
+        },
+        "price": {
+          "ru": "бесплатно",
+          "en": "free"
+        },
+        "secondaryLabel": {
+          "ru": "",
+          "en": ""
+        },
+        "secondaryUrl": ""
+      },
+      "titleEn": "Narrata"
+    },
+    {
+      "id": "p2",
+      "status": "wip",
+      "href": "",
+      "icon": "pen",
+      "accent": "s",
+      "progress": 60,
+      "cardStyle": "accordion",
+      "title": "Проект 02",
+      "sub": {
+        "ru": "рабочее название · заметки",
+        "en": "working title · notes"
+      },
+      "text": {
+        "ru": "Быстрые заметки со связями между ними и поиском по локальному хранилищу. Ранняя версия уже работает у меня каждый день.",
+        "en": "Quick notes with links between them and instant search across a local vault. An early build already runs on my machine daily."
+      },
+      "details": {
+        "tagline": {
+          "ru": "",
+          "en": ""
+        },
+        "lead": {
+          "ru": "",
+          "en": ""
+        },
+        "features": [],
+        "externalUrl": "",
+        "externalLabel": {
+          "ru": "",
+          "en": ""
+        },
+        "enabled": false,
+        "layout": "cover",
+        "color": "",
+        "cover": "",
+        "version": "",
+        "date": {
+          "ru": "",
+          "en": ""
+        },
+        "platforms": {
+          "ru": "",
+          "en": ""
+        },
+        "price": {
+          "ru": "",
+          "en": ""
+        },
+        "secondaryLabel": {
+          "ru": "",
+          "en": ""
+        },
+        "secondaryUrl": ""
+      },
+      "titleEn": "Project 02"
+    },
+    {
+      "id": "p3",
+      "status": "soon",
+      "href": "",
+      "icon": "board",
+      "accent": "v",
+      "progress": 35,
+      "cardStyle": "accordion",
+      "title": "Проект 03",
+      "sub": {
+        "ru": "рабочее название · планирование",
+        "en": "working title · planning"
+      },
+      "text": {
+        "ru": "Локальные доски для личных проектов: задачи, статусы, горячие клавиши. Синхронизация через обычную папку — без сервера и регистрации.",
+        "en": "Local boards for personal projects: tasks, statuses, keyboard shortcuts. Syncing through a plain folder — no server, no account."
+      },
+      "details": {
+        "tagline": {
+          "ru": "",
+          "en": ""
+        },
+        "lead": {
+          "ru": "",
+          "en": ""
+        },
+        "features": [],
+        "externalUrl": "",
+        "externalLabel": {
+          "ru": "",
+          "en": ""
+        },
+        "enabled": false,
+        "layout": "cover",
+        "color": "",
+        "cover": "",
+        "version": "",
+        "date": {
+          "ru": "",
+          "en": ""
+        },
+        "platforms": {
+          "ru": "",
+          "en": ""
+        },
+        "price": {
+          "ru": "",
+          "en": ""
+        },
+        "secondaryLabel": {
+          "ru": "",
+          "en": ""
+        },
+        "secondaryUrl": ""
+      },
+      "titleEn": "Project 03"
+    },
+    {
+      "id": "p4",
+      "status": "idea",
+      "href": "",
+      "icon": "gear",
+      "accent": "g",
+      "progress": 12,
+      "cardStyle": "accordion",
+      "title": "Проект 04",
+      "sub": {
+        "ru": "рабочее название · утилиты",
+        "en": "working title · utilities"
+      },
+      "text": {
+        "ru": "Небольшие утилиты для рутины: бэкапы проектов, сборка changelog, публикация релиза одной командой. Пока живёт в набросках.",
+        "en": "Small utilities for the routine: project backups, changelog assembly, publishing a release with one command. Still just sketches."
+      },
+      "details": {
+        "tagline": {
+          "ru": "",
+          "en": ""
+        },
+        "lead": {
+          "ru": "",
+          "en": ""
+        },
+        "features": [],
+        "externalUrl": "",
+        "externalLabel": {
+          "ru": "",
+          "en": ""
+        },
+        "enabled": false,
+        "layout": "cover",
+        "color": "",
+        "cover": "",
+        "version": "",
+        "date": {
+          "ru": "",
+          "en": ""
+        },
+        "platforms": {
+          "ru": "",
+          "en": ""
+        },
+        "price": {
+          "ru": "",
+          "en": ""
+        },
+        "secondaryLabel": {
+          "ru": "",
+          "en": ""
+        },
+        "secondaryUrl": ""
+      },
+      "titleEn": "Project 04"
+    }
+  ],
+  "t": {
+    "ru": {
+      "nav.home": "Главная",
+      "nav.projects": "Проекты",
+      "nav.about": "Обо мне",
+      "nav.contact": "Контакты",
+      "nav.support": "Поддержать",
+      "a11y.menu": "Меню",
+      "a11y.toTop": "Наверх",
+      "footer.copy": "Сделано вручную.",
+      "support.title": "Поддержать проекты",
+      "support.note": "Любая сумма — это ещё один вечер разработки. Выберите удобный способ:",
+      "support.boostySub": "регулярная поддержка",
+      "support.patreonSub": "регулярная поддержка",
+      "support.daSub": "разовый донат",
+      "support.tbankSub": "сбор картой, без регистрации",
+      "support.ctSub": "картой, без регистрации",
+      "support.close": "закрыть",
+      "mock.project": "Проект",
+      "mock.manuscript": "Рукопись",
+      "mock.characters": "Персонажи",
+      "mock.locations": "Локации",
+      "mock.timeline": "Хронология",
+      "mock.notes": "Заметки",
+      "mock.addScene": "+ сцена",
+      "mock.chapter": "Глава 4 · сцена 2",
+      "mock.title": "Дальний свет",
+      "mock.text": "Он выключил фары, и темнота придвинулась вплотную. Где-то впереди, за поворотом, дорога снова становилась историей — надо было только дописать её до рассвета.",
+      "mock.chip1": "черновик",
+      "mock.chip2": "1 248 слов",
+      "mock.chip3": "сохранено локально",
+      "home.title": "DalniyX — независимый разработчик",
+      "home.desc": "DalniyX — независимый разработчик. Небольшие приложения для тех, кто создаёт истории.",
+      "home.scroll": "Листайте вниз",
+      "home.titleSub": "Небольшие приложения<br>для тех, кто создаёт истории.",
+      "home.pr.eyebrow": "проекты",
+      "home.pr.h2": "Что я делаю",
+      "home.pr.sub": "У готовых проектов — подробная карточка с описанием и особенностями прямо здесь. Остальные пока в работе: покажу, как только будет что показывать.",
+      "home.f.all": "Все",
+      "home.f.release": "В релизе",
+      "home.f.wip": "В разработке",
+      "home.ready": "готовность",
+      "home.ab.eyebrow": "обо мне",
+      "home.ab.h2": "Один разработчик<br>и понятные правила.",
+      "home.ab.p1": "Я делаю софт, которым пользуюсь сам — в одиночку, без команды и инвесторов. Каждый проект остаётся обычной папкой на вашем диске: работает без интернета, ничего о вас не собирает, а версии выходят с честным списком изменений.",
+      "home.ab.l1": "Разработчик",
+      "home.ab.v1": "Sergey — DalniyX",
+      "home.ab.l2": "Чем занимаюсь",
+      "home.ab.v2": "Настольные инструменты и эксперименты",
+      "home.s1.t": "Идея",
+      "home.s1.p": "Своя боль → короткое описание в заметках → набросок интерфейса.",
+      "home.s2.t": "Прототип",
+      "home.s2.p": "Собираю рабочую версию за пару недель и живу в ней каждый день.",
+      "home.s3.t": "Полировка",
+      "home.s3.p": "Горячие клавиши, анимации и мелочи, ради которых хочется вернуться.",
+      "home.s4.t": "Релиз",
+      "home.s4.p": "Страница проекта, сборки, changelog и ответы на обратную связь.",
+      "home.fin.eyebrow": "дальше",
+      "home.fin.h2": "Написать или поддержать",
+      "home.fin.sub": "Мои проекты бесплатны и без рекламы. Если что-то из этого пригодилось — поддержка превращается в новые вечера за кодом. А если что-то сломалось или не хватает функции, просто напишите: отвечаю сам.",
+      "home.fin.support": "Поддержать проекты",
+      "home.fin.note": "баги и идеи — в Telegram или issues на GitHub",
+      "nar.title": "Narrata — рабочее место автора · DalniyX",
+      "nar.desc": "Narrata — рабочая среда для нарративного дизайнера: графы диалогов, карточки персонажей и мира, симулятор сцен. Бесплатно, офлайн, Windows, браузер и Android.",
+      "nar.back": "← все проекты",
+      "nar.tagline": "Рабочее место автора —<br>вся история в одном окне.",
+      "nar.lead": "Графы диалогов и сюжетных веток, карточки персонажей и локаций, переменные мира и симулятор сцен — Narrata держит всё это в одном проекте-папке на вашем диске: без аккаунта и без чужих серверов. Работает как приложение для Windows, в браузере и на Android; интерфейс — на русском и английском.",
+      "nar.badge": "В РЕЛИЗЕ · v1.0",
+      "nar.free": "бесплатно",
+      "nar.site": "Перейти на сайт проекта",
+      "status.release": "В РЕЛИЗЕ",
+      "status.wip": "В РАЗРАБОТКЕ",
+      "status.soon": "СКОРО BETA",
+      "status.idea": "КОНЦЕПТ",
+      "pm.version": "Версия",
+      "pm.date": "Релиз",
+      "pm.platforms": "Платформы",
+      "pm.price": "Цена"
+    },
+    "en": {
+      "nav.home": "Home",
+      "nav.projects": "Projects",
+      "nav.about": "About",
+      "nav.contact": "Contact",
+      "nav.support": "Support",
+      "a11y.menu": "Menu",
+      "a11y.toTop": "Back to top",
+      "footer.copy": "Handmade.",
+      "support.title": "Support the projects",
+      "support.note": "Any amount is one more evening of development. Pick whatever is easier for you:",
+      "support.boostySub": "recurring support",
+      "support.patreonSub": "recurring support",
+      "support.daSub": "one-time donation",
+      "support.tbankSub": "card transfer, no signup",
+      "support.ctSub": "by card, no signup",
+      "support.close": "close",
+      "mock.project": "Project",
+      "mock.manuscript": "Manuscript",
+      "mock.characters": "Characters",
+      "mock.locations": "Locations",
+      "mock.timeline": "Timeline",
+      "mock.notes": "Notes",
+      "mock.addScene": "+ scene",
+      "mock.chapter": "Chapter 4 · scene 2",
+      "mock.title": "Distant Light",
+      "mock.text": "He switched off the headlights and the darkness moved in close. Somewhere ahead, past the turn, the road became a story again — all that was left was to finish it before dawn.",
+      "mock.chip1": "draft",
+      "mock.chip2": "1,248 words",
+      "mock.chip3": "saved locally",
+      "home.title": "DalniyX — independent developer",
+      "home.desc": "DalniyX — independent developer. Small apps for people who build stories.",
+      "home.scroll": "Scroll down",
+      "home.titleSub": "Small apps for people<br>who build stories.",
+      "home.pr.eyebrow": "projects",
+      "home.pr.h2": "What I build",
+      "home.pr.sub": "Released projects get a detailed card with description and features right here. The rest are still in progress: I will show them once there is something to show.",
+      "home.f.all": "All",
+      "home.f.release": "Released",
+      "home.f.wip": "In progress",
+      "home.ready": "progress",
+      "home.ab.eyebrow": "about",
+      "home.ab.h2": "One developer,<br>a few clear rules.",
+      "home.ab.p1": "I build software I use myself — on my own, no team, no investors. Every project stays an ordinary folder on your own drive: it works offline, collects nothing about you, and every release comes with an honest list of changes.",
+      "home.ab.l1": "Developer",
+      "home.ab.v1": "Sergey — DalniyX",
+      "home.ab.l2": "Focus",
+      "home.ab.v2": "Desktop tools and experiments",
+      "home.s1.t": "Idea",
+      "home.s1.p": "My own pain → a short note describing it → a rough sketch of the interface.",
+      "home.s2.t": "Prototype",
+      "home.s2.p": "I put together a working build in a couple of weeks and live inside it.",
+      "home.s3.t": "Polish",
+      "home.s3.p": "Shortcuts, animation and the small things that make you want to come back.",
+      "home.s4.t": "Release",
+      "home.s4.p": "A project page, builds, a changelog and answers to every message.",
+      "home.fin.eyebrow": "next",
+      "home.fin.h2": "Say hello or support",
+      "home.fin.sub": "My projects are free and ad-free today. If one of them turned out useful, support simply turns into more evenings of development. And if something broke or a feature is missing — just write, I answer personally.",
+      "home.fin.support": "Support the projects",
+      "home.fin.note": "bugs and ideas — Telegram or GitHub issues",
+      "nar.title": "Narrata — a writing desk for authors · DalniyX",
+      "nar.desc": "Narrata — a workspace for narrative designers: dialogue graphs, character and world cards, a scene simulator. Free, offline, Windows, browser and Android.",
+      "nar.back": "← all projects",
+      "nar.tagline": "A writing desk —<br>the whole story in one window.",
+      "nar.lead": "Dialogue and quest graphs, character and location cards, world variables and a scene simulator — Narrata keeps it all in one project folder on your own drive, no account, no server. It runs as a Windows app, in the browser and on Android, with a bilingual Russian/English interface.",
+      "nar.badge": "RELEASED · v1.0",
+      "nar.free": "free",
+      "nar.site": "Go to the project's website",
+      "status.release": "RELEASED",
+      "status.wip": "IN PROGRESS",
+      "status.soon": "BETA SOON",
+      "status.idea": "CONCEPT",
+      "pm.version": "Version",
+      "pm.date": "Released",
+      "pm.platforms": "Platforms",
+      "pm.price": "Price"
+    }
+  }
+};

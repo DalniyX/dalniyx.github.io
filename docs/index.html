@@ -6,14 +6,31 @@
 <title>DalniyX — независимый разработчик</title>
 <meta name="description" content="DalniyX — независимый разработчик. Небольшие приложения для тех, кто создаёт истории.">
 <meta name="theme-color" content="#08090c">
+<!-- Превью ссылки (Telegram, VK, Discord…). Адреса картинки и страницы обязаны быть
+     абсолютными; если сайт переедет на свой домен — поменять dalniyx.github.io здесь
+     и в строках canonical/og:url. Сама картинка — assets/img/og-image.jpg, 1200×630. -->
+<link rel="canonical" href="https://dalniyx.github.io/">
 <meta property="og:title" content="DalniyX — независимый разработчик">
 <meta property="og:description" content="Небольшие приложения для тех, кто создаёт истории.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="DalniyX">
+<meta property="og:url" content="https://dalniyx.github.io/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:image" content="https://dalniyx.github.io/assets/img/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="DalniyX — небольшие приложения для тех, кто создаёт истории">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dalniyx.github.io/assets/img/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23ff7a2f'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='14' font-weight='700' text-anchor='middle' fill='%231a1207'%3EDX%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/style.css?v=20260927w">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/style.css?v=20261002c">
 <script>setTimeout(function(){document.documentElement.classList.add("ready")},1500);</script>
 <style>
   /* стили, нужные только главной */
@@ -116,7 +133,7 @@
         <img class="brand-icon" src="assets/img/brand-icon.png" alt="" width="40" height="40">
         <span class="brand-text">
           <span class="brand-name">Dalniy<span class="x">X</span><i class="cursor" aria-hidden="true"></i></span>
-          <span class="brand-sub">indie dev</span>
+          <span class="brand-sub">Developer</span>
         </span>
       </a>
 
@@ -175,7 +192,7 @@
     </h1>
   </div>
 
-  <a class="scroll-hint" id="scrollHint" href="#intro" aria-hidden="true" tabindex="-1">
+  <a class="scroll-hint" id="scrollHint" href="#projects" aria-hidden="true" tabindex="-1">
     <span data-t="home.scroll">Листайте вниз</span>
     <i></i>
   </a>
@@ -226,8 +243,8 @@
       <h2 class="grad rv" style="margin-top:12px;font-size:clamp(2rem,4.2vw,2.8rem)" data-t="home.ab.h2">Один разработчик<br>и понятные правила.</h2>
       <p class="rv" style="margin-top:22px;font-size:15.5px;line-height:1.75;color:var(--muted)" data-t="home.ab.p1">
         Я делаю софт, которым пользуюсь сам — в одиночку, без команды и инвесторов.
-        Каждый проект остаётся обычной папкой на вашем диске: работает без интернета,
-        ничего о вас не собирает, а версии выходят с честным списком изменений.
+        Каждый проект остаётся обычной папкой на вашем диске: работает без интернета
+        и не использует встроенную аналитику и трекеры, а версии выходят с честным списком изменений.
       </p>
 
       <div class="tags rv">
@@ -306,7 +323,6 @@
     </div>
     <div class="links">
       <a href="#projects" data-t="nav.projects">Проекты</a>
-      <a href="narrata.html">Narrata</a>
       <a href="https://github.com/dalniyx" data-link="github" target="_blank" rel="noopener">GitHub</a>
       <a href="https://t.me/dalniyx" data-link="telegram" target="_blank" rel="noopener">Telegram</a>
     </div>
@@ -329,7 +345,7 @@
         <span><b>Boosty</b><small data-t="support.boostySub">регулярная поддержка</small></span>
         <span class="go">→</span>
       </a>
-      <a class="support-item" href="" data-link="patreon" target="_blank" rel="noopener">
+      <a class="support-item" data-link="patreon" target="_blank" rel="noopener">
         <span class="ico p sm" style="width:38px;height:38px;border-radius:11px;font-weight:800;color:#2b0e08">P</span>
         <span><b>Patreon</b><small data-t="support.patreonSub">регулярная поддержка</small></span>
         <span class="go">→</span>
@@ -339,12 +355,12 @@
         <span><b>DonationAlerts</b><small data-t="support.daSub">разовый донат</small></span>
         <span class="go">→</span>
       </a>
-      <a class="support-item" href="" data-link="tbank" target="_blank" rel="noopener">
+      <a class="support-item" data-link="tbank" target="_blank" rel="noopener">
         <span class="ico y sm" style="width:38px;height:38px;border-radius:11px;font-weight:800;color:#22150a">Т</span>
         <span><b>Т-Банк</b><small data-t="support.tbankSub">сбор картой, без регистрации</small></span>
         <span class="go">→</span>
       </a>
-      <a class="support-item" href="https://pay.cloudtips.ru/p/00000000" data-link="cloudtips" target="_blank" rel="noopener">
+      <a class="support-item" data-link="cloudtips" target="_blank" rel="noopener">
         <span class="ico g sm" style="width:38px;height:38px;border-radius:11px;font-weight:800;color:#0a0d11">₽</span>
         <span><b>CloudTips</b><small data-t="support.ctSub">картой, без регистрации</small></span>
         <span class="go">→</span>
@@ -355,10 +371,9 @@
 </dialog>
 
 <!-- ============ МОДАЛКА ПРОЕКТА ============
-     Общее окно проекта вместо отдельных страниц (narrata.html физически ещё
-     лежит). Открывается только у проектов с включённым «Окно проекта по клику»
-     в Студии; всё наполнение — из project.details в content.js, см.
-     fillProjectModal() в app.js. -->
+     Общее окно проекта вместо отдельных страниц. Открывается только у проектов
+     с включённым «Окно проекта по клику» в Студии; всё наполнение — из
+     project.details в content.js, см. fillProjectModal() в app.js. -->
 <dialog class="project-modal" id="projectModal" aria-label="Project">
   <div class="project-modal-box">
     <button class="project-modal-close" data-close aria-label="Закрыть">
@@ -380,8 +395,8 @@
   </div>
 </dialog>
 
-<script src="assets/content.js?v=20260927w" defer></script>
-<script src="assets/i18n.js?v=20260927w" defer></script>
-<script src="assets/app.js?v=20260927w" defer></script>
+<script src="assets/content.js?v=20261002c" defer></script>
+<script src="assets/i18n.js?v=20261002c" defer></script>
+<script src="assets/app.js?v=20261002c" defer></script>
 </body>
 </html>

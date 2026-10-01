@@ -153,7 +153,8 @@ window.DX = {
         },
         "secondaryUrl": ""
       },
-      "titleEn": "Project 02"
+      "titleEn": "Project 02",
+      "hidden": true
     },
     {
       "id": "p3",
@@ -210,7 +211,8 @@ window.DX = {
         },
         "secondaryUrl": ""
       },
-      "titleEn": "Project 03"
+      "titleEn": "Project 03",
+      "hidden": true
     },
     {
       "id": "p4",
@@ -267,7 +269,8 @@ window.DX = {
         },
         "secondaryUrl": ""
       },
-      "titleEn": "Project 04"
+      "titleEn": "Project 04",
+      "hidden": true
     }
   ],
   "t": {
@@ -288,19 +291,6 @@ window.DX = {
       "support.tbankSub": "сбор картой, без регистрации",
       "support.ctSub": "картой, без регистрации",
       "support.close": "закрыть",
-      "mock.project": "Проект",
-      "mock.manuscript": "Рукопись",
-      "mock.characters": "Персонажи",
-      "mock.locations": "Локации",
-      "mock.timeline": "Хронология",
-      "mock.notes": "Заметки",
-      "mock.addScene": "+ сцена",
-      "mock.chapter": "Глава 4 · сцена 2",
-      "mock.title": "Дальний свет",
-      "mock.text": "Он выключил фары, и темнота придвинулась вплотную. Где-то впереди, за поворотом, дорога снова становилась историей — надо было только дописать её до рассвета.",
-      "mock.chip1": "черновик",
-      "mock.chip2": "1 248 слов",
-      "mock.chip3": "сохранено локально",
       "home.title": "DalniyX — независимый разработчик",
       "home.desc": "DalniyX — независимый разработчик. Небольшие приложения для тех, кто создаёт истории.",
       "home.scroll": "Листайте вниз",
@@ -314,7 +304,7 @@ window.DX = {
       "home.ready": "готовность",
       "home.ab.eyebrow": "обо мне",
       "home.ab.h2": "Один разработчик<br>и понятные правила.",
-      "home.ab.p1": "Я делаю софт, которым пользуюсь сам — в одиночку, без команды и инвесторов. Каждый проект остаётся обычной папкой на вашем диске: работает без интернета, ничего о вас не собирает, а версии выходят с честным списком изменений.",
+      "home.ab.p1": "Я делаю софт, которым пользуюсь сам — в одиночку, без команды и инвесторов. Каждый проект остаётся обычной папкой на вашем диске: работает без интернета и не использует встроенную аналитику и трекеры, а версии выходят с честным списком изменений.",
       "home.ab.l1": "Разработчик",
       "home.ab.v1": "Sergey — DalniyX",
       "home.ab.l2": "Чем занимаюсь",
@@ -332,14 +322,6 @@ window.DX = {
       "home.fin.sub": "Мои проекты бесплатны и без рекламы. Если что-то из этого пригодилось — поддержка превращается в новые вечера за кодом. А если что-то сломалось или не хватает функции, просто напишите: отвечаю сам.",
       "home.fin.support": "Поддержать проекты",
       "home.fin.note": "баги и идеи — в Telegram или issues на GitHub",
-      "nar.title": "Narrata — рабочее место автора · DalniyX",
-      "nar.desc": "Narrata — рабочая среда для нарративного дизайнера: графы диалогов, карточки персонажей и мира, симулятор сцен. Бесплатно, офлайн, Windows, браузер и Android.",
-      "nar.back": "← все проекты",
-      "nar.tagline": "Рабочее место автора —<br>вся история в одном окне.",
-      "nar.lead": "Графы диалогов и сюжетных веток, карточки персонажей и локаций, переменные мира и симулятор сцен — Narrata держит всё это в одном проекте-папке на вашем диске: без аккаунта и без чужих серверов. Работает как приложение для Windows, в браузере и на Android; интерфейс — на русском и английском.",
-      "nar.badge": "В РЕЛИЗЕ · v1.0",
-      "nar.free": "бесплатно",
-      "nar.site": "Перейти на сайт проекта",
       "status.release": "В РЕЛИЗЕ",
       "status.wip": "В РАЗРАБОТКЕ",
       "status.soon": "СКОРО BETA",
@@ -347,7 +329,9 @@ window.DX = {
       "pm.version": "Версия",
       "pm.date": "Релиз",
       "pm.platforms": "Платформы",
-      "pm.price": "Цена"
+      "pm.price": "Цена",
+      "pm.open": "Перейти на сайт проекта",
+      "home.ogDesc": "Небольшие приложения для тех, кто создаёт истории."
     },
     "en": {
       "nav.home": "Home",
@@ -366,19 +350,6 @@ window.DX = {
       "support.tbankSub": "card transfer, no signup",
       "support.ctSub": "by card, no signup",
       "support.close": "close",
-      "mock.project": "Project",
-      "mock.manuscript": "Manuscript",
-      "mock.characters": "Characters",
-      "mock.locations": "Locations",
-      "mock.timeline": "Timeline",
-      "mock.notes": "Notes",
-      "mock.addScene": "+ scene",
-      "mock.chapter": "Chapter 4 · scene 2",
-      "mock.title": "Distant Light",
-      "mock.text": "He switched off the headlights and the darkness moved in close. Somewhere ahead, past the turn, the road became a story again — all that was left was to finish it before dawn.",
-      "mock.chip1": "draft",
-      "mock.chip2": "1,248 words",
-      "mock.chip3": "saved locally",
       "home.title": "DalniyX — independent developer",
       "home.desc": "DalniyX — independent developer. Small apps for people who build stories.",
       "home.scroll": "Scroll down",
@@ -392,7 +363,7 @@ window.DX = {
       "home.ready": "progress",
       "home.ab.eyebrow": "about",
       "home.ab.h2": "One developer,<br>a few clear rules.",
-      "home.ab.p1": "I build software I use myself — on my own, no team, no investors. Every project stays an ordinary folder on your own drive: it works offline, collects nothing about you, and every release comes with an honest list of changes.",
+      "home.ab.p1": "I build software I use myself — on my own, no team, no investors. Every project stays an ordinary folder on your own drive: it works offline and uses no built-in analytics or trackers, and every release comes with an honest list of changes.",
       "home.ab.l1": "Developer",
       "home.ab.v1": "Sergey — DalniyX",
       "home.ab.l2": "Focus",
@@ -410,14 +381,6 @@ window.DX = {
       "home.fin.sub": "My projects are free and ad-free today. If one of them turned out useful, support simply turns into more evenings of development. And if something broke or a feature is missing — just write, I answer personally.",
       "home.fin.support": "Support the projects",
       "home.fin.note": "bugs and ideas — Telegram or GitHub issues",
-      "nar.title": "Narrata — a writing desk for authors · DalniyX",
-      "nar.desc": "Narrata — a workspace for narrative designers: dialogue graphs, character and world cards, a scene simulator. Free, offline, Windows, browser and Android.",
-      "nar.back": "← all projects",
-      "nar.tagline": "A writing desk —<br>the whole story in one window.",
-      "nar.lead": "Dialogue and quest graphs, character and location cards, world variables and a scene simulator — Narrata keeps it all in one project folder on your own drive, no account, no server. It runs as a Windows app, in the browser and on Android, with a bilingual Russian/English interface.",
-      "nar.badge": "RELEASED · v1.0",
-      "nar.free": "free",
-      "nar.site": "Go to the project's website",
       "status.release": "RELEASED",
       "status.wip": "IN PROGRESS",
       "status.soon": "BETA SOON",
@@ -425,7 +388,9 @@ window.DX = {
       "pm.version": "Version",
       "pm.date": "Released",
       "pm.platforms": "Platforms",
-      "pm.price": "Price"
+      "pm.price": "Price",
+      "pm.open": "Go to the project's website",
+      "home.ogDesc": "Small apps for people who build stories."
     }
   }
 };

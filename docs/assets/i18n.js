@@ -28,7 +28,6 @@
 
   function apply(lang) {
     var dict = DICT[lang] || DICT.ru || {};
-    var page = document.body.dataset.page || 'home';
 
     document.documentElement.lang = lang;
 
@@ -41,11 +40,17 @@
       if (v != null) el.setAttribute('aria-label', v);
     });
 
-    var titleKey = page === 'narrata' ? 'nar.title' : 'home.title';
-    var descKey = page === 'narrata' ? 'nar.desc' : 'home.desc';
-    if (dict[titleKey]) document.title = dict[titleKey];
-    var meta = document.querySelector('meta[name="description"]');
-    if (meta && dict[descKey]) meta.setAttribute('content', dict[descKey]);
+    if (dict['home.title']) document.title = dict['home.title'];
+    /* мета-теги на текущем языке; боты JS не запускают и видят статичный
+       русский <head>, а вот скопированная из адресной строки ссылка в
+       мессенджере и «поделиться» в браузере берут актуальные значения */
+    var setMeta = function (selector, value) {
+      var el = document.querySelector(selector);
+      if (el && value) el.setAttribute('content', value);
+    };
+    setMeta('meta[name="description"]', dict['home.desc']);
+    setMeta('meta[property="og:title"]', dict['home.title']);
+    setMeta('meta[property="og:description"]', dict['home.ogDesc']);
 
     var box = document.getElementById('lang');
     if (box) {

@@ -27,8 +27,11 @@
          приоритетный, что бы ни было записано в самом правиле). */
       if (url) {
         a.setAttribute('href', url);
+        a.removeAttribute('aria-hidden');
         a.style.display = '';
       } else {
+        a.removeAttribute('href');       // без адреса это уже не ссылка
+        a.setAttribute('aria-hidden', 'true');
         a.style.display = 'none';
       }
     });
@@ -90,7 +93,18 @@
       '" transform="rotate(-90 19 19)"/></svg><b>' + progress + '%</b></span>';
   }
 
-  function cardHTML(p, lang, index) {
+  /* Публично показываем только проекты без hidden:true (флаг ставится в
+     Студии → Проекты → «Показывать на сайте»). Скрытые остаются в данных —
+     просто не попадают ни на карточки, ни в бегущую строку, ни в фильтры. */
+  function isPublic(p) { return !!p && p.hidden !== true; }
+
+  /* Две группы для фильтров: «В релизе» — только status:release,
+     «В разработке» — всё остальное (wip, soon, idea). */
+  function groupOf(p) { return p.status === 'release' ? 'release' : 'wip'; }
+
+  /* index — позиция проекта в DX.projects (по ней клик находит данные),
+     pos — порядковый номер среди ВИДИМЫХ карточек (его и показываем) */
+  function cardHTML(p, lang, index, pos) {
     var title = esc(lang === 'en' && p.titleEn ? p.titleEn : p.title);
     var style = p.cardStyle === 'feature' || p.cardStyle === 'minimal' ? p.cardStyle : 'accordion';
     var badge = '<span class="badge ' + (BADGE[p.status] || 'b-idea') + '">' +
@@ -116,14 +130,14 @@
         (loc(p.sub, lang) ? '<p class="sub">' + esc(loc(p.sub, lang)) + '</p>' : '') +
         '<p class="txt">' + esc(loc(p.text, lang)) + '</p>' + prog;
     }
-    var cat = p.status === 'release' ? 'release' : 'wip';
+    var cat = groupOf(p);
     /* в покое — лапа, при наведении/раскрытии — кроссфейд на кота "no access"
        (см. .ac-cat-paw/.ac-cat-noaccess в style.css) */
     var noise = cat === 'wip' ? '<span class="ac-cat-art-wrap"><span class="ac-cat-paw" aria-hidden="true"></span><span class="ac-cat-noaccess" aria-hidden="true"></span></span>' +
       '<span class="ac-noise" aria-hidden="true"></span><span class="ac-glitch-bar" aria-hidden="true"></span>' : '';
     var img = p.image ? '<img class="ac-img" src="' + esc(p.image) + '" alt="" loading="lazy">' : '';
     var inner = img +
-      '<span class="ac-num">' + num2(index + 1) + '</span>' +
+      '<span class="ac-num">' + num2(pos + 1) + '</span>' +
       '<span class="ac-label">' + title + '</span>' +
       '<div class="ac-body">' + body + '</div>' + noise;
     var hasImg = p.image ? ' has-img' : '';
@@ -133,11 +147,12 @@
        карточку с DX.projects[idx] в обработчике клика. */
     var noOpen = (p.details && p.details.enabled) || p.href ? '' : ' no-open';
     return '<button type="button" class="ac-col rv' + hasImg + styleClass + noOpen + '" data-idx="' + index +
-      '" data-cat="' + cat + '" data-accent="' + esc(p.accent) + '" style="--i:' + index + '">' + inner + '</button>';
+      '" data-cat="' + cat + '" data-accent="' + esc(p.accent) + '" style="--i:' + pos + '">' + inner + '</button>';
   }
 
   var grid = $('#grid');
   var firstRender = true;
+  var currentFilter = 'all';   // выбранный фильтр переживает перерисовку (смена языка)
   function setupAccordionTouch() {
     $$('.ac-col', grid).forEach(function (col) {
       col.addEventListener('click', function (e) {
@@ -160,11 +175,35 @@
   function renderProjects() {
     if (!grid || !DX.projects) return;
     var lang = document.documentElement.lang || 'ru';
-    grid.innerHTML = DX.projects.map(function (p, i) { return cardHTML(p, lang, i); }).join('');
+    var visible = [];
+    DX.projects.forEach(function (p, i) { if (isPublic(p)) visible.push({ p: p, i: i }); });
+    grid.innerHTML = visible.map(function (e, pos) { return cardHTML(e.p, lang, e.i, pos); }).join('');
     if (!firstRender) $$('.rv', grid).forEach(function (el) { el.classList.add('in'); });
     firstRender = false;
+    syncFilters(visible);
     setupAccordionTouch();
     updateAccordionNav();
+  }
+
+  /* Кнопки фильтров показываются только если у них есть что показать; когда
+     видимые проекты все из одной группы, сам ряд фильтров прячется — иначе
+     «В разработке» вёл бы на пустую гармошку. Выбранный фильтр применяется
+     сразу после перерисовки (без анимации). */
+  function syncFilters(visible) {
+    var count = { release: 0, wip: 0 };
+    visible.forEach(function (e) { count[groupOf(e.p)]++; });
+    var btns = $$('.f-btn');
+    btns.forEach(function (b) {
+      var f = b.dataset.f;
+      b.style.display = (f === 'all' || count[f]) ? '' : 'none';
+    });
+    var row = $('.filters');
+    if (row) row.style.display = (count.release && count.wip) ? '' : 'none';
+    if (currentFilter !== 'all' && !count[currentFilter]) currentFilter = 'all';
+    btns.forEach(function (b) { b.classList.toggle('on', b.dataset.f === currentFilter); });
+    $$('#grid > [data-cat]').forEach(function (card) {
+      card.style.display = (currentFilter === 'all' || card.dataset.cat === currentFilter) ? '' : 'none';
+    });
   }
 
   /* ---------- гармошка: стрелки прокрутки, если проектов много ----------
@@ -207,17 +246,17 @@
   document.addEventListener('langchange', renderProjects);
 
   /* ---------- бегущая строка: только проекты в релизе ----------
-     Одного названия мало, чтобы заполнить строку целиком на широком
-     экране — набор повторяется, пока не наберётся MIN_ITEMS, и только
-     затем дублируется 2× для бесшовного translateX(-50%)-цикла. Если
-     в релизе ничего нет — полоса просто скрыта. */
+     Названия повторяются, пока не наберётся MIN_ITEMS, и только затем
+     набор дублируется 2× для бесшовного translateX(-50%)-цикла. Но если
+     публичных релизных проектов меньше двух, строка превратилась бы в одно
+     и то же слово много раз — тогда она скрыта целиком. */
   var marqueeTrack = $('#marqueeTrack');
   var marqueeBox = $('#marquee');
   var MARQUEE_MIN_ITEMS = 10;
   function renderMarquee() {
     if (!marqueeTrack) return;
-    var released = (DX.projects || []).filter(function (p) { return p.status === 'release'; });
-    if (!released.length) { if (marqueeBox) marqueeBox.hidden = true; return; }
+    var released = (DX.projects || []).filter(function (p) { return isPublic(p) && p.status === 'release'; });
+    if (released.length < 2) { if (marqueeBox) marqueeBox.hidden = true; return; }
     if (marqueeBox) marqueeBox.hidden = false;
     var lang = document.documentElement.lang || 'ru';
     var names = released.map(function (p) {
@@ -418,6 +457,7 @@
       fbtns.forEach(function (x) { x.classList.remove('on'); });
       b.classList.add('on');
       var f = b.dataset.f;
+      currentFilter = f;
       $$('#grid > [data-cat]').forEach(function (card) {
         var show = f === 'all' || card.dataset.cat === f;
         if (show) {
@@ -648,8 +688,13 @@
   /* ---------- модалка поддержки ----------
      site.showSupport=false скрывает кнопки «Поддержать» целиком (шапка, мобильное
      меню, финальный блок), даже если ссылки заполнены — общий рубильник отдельно
-     от того, что уже делает bindLinks() для отдельных площадок. */
-  var showSupport = !DX.site || DX.site.showSupport !== false;
+     от того, что уже делает bindLinks() для отдельных площадок. Кнопки также
+     скрыты, если ни у одной площадки в окне нет ссылки: иначе они открывали бы
+     пустое окно. */
+  var hasSupportLink = $$('#support [data-link]').some(function (a) {
+    return !!(DX.links || {})[a.dataset.link];
+  });
+  var showSupport = (!DX.site || DX.site.showSupport !== false) && hasSupportLink;
   if (!showSupport) {
     $$('[data-support]').forEach(function (b) { b.style.display = 'none'; });
   }
@@ -731,7 +776,7 @@
     var cta = '';
     if (d.externalUrl && !hide.primary) {
       cta += '<a class="btn btn-primary" href="' + esc(d.externalUrl) + '" target="_blank" rel="noopener"><span>' +
-        esc(loc(d.externalLabel, lang) || tr('nar.site', lang) || 'Открыть') + '</span>' + ARROW_SVG + '</a>';
+        esc(loc(d.externalLabel, lang) || tr('pm.open', lang) || 'Открыть') + '</span>' + ARROW_SVG + '</a>';
     }
     if (d.secondaryUrl && !hide.secondary) {
       cta += '<a class="btn btn-ghost" href="' + esc(d.secondaryUrl) + '" target="_blank" rel="noopener"><span>' +

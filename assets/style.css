@@ -460,13 +460,18 @@ nav.links a.active::after{content:"";position:absolute;left:13px;right:13px;bott
 }
 
 /* ---------- модалка поддержки ---------- */
-dialog.support{border:0;padding:0;background:transparent;max-width:min(460px,calc(100% - 32px));color:var(--text)}
-dialog.support::backdrop{background:rgba(6,7,10,.7);backdrop-filter:blur(10px);opacity:0;transition:opacity .4s var(--e-out)}
-dialog.support[open]::backdrop{opacity:1}
+/* Открытие и закрытие окон (поддержка, проект): .shown ставит/снимает app.js. Переход в состояние .shown
+   медленный и мягкий, обратно — короткий: закрывающееся окно не должно «висеть». Затемнение (::backdrop)
+   привязано к .shown, а не к [open] — иначе оно появлялось бы рывком и пропадало вместе с закрытием диалога.
+   overflow:visible у <dialog> обязателен: по умолчанию у него auto, и пока окно сдвигается/масштабируется,
+   на нём на миг вылезала собственная полоса прокрутки. */
+dialog.support{border:0;padding:0;background:transparent;max-width:min(460px,calc(100% - 32px));color:var(--text);overflow:visible}
+dialog.support::backdrop{background:rgba(6,7,10,.7);backdrop-filter:blur(10px);opacity:0;transition:opacity .25s var(--e-out)}
+dialog.support.shown::backdrop{opacity:1;transition-duration:.4s}
 .support-box{border:1px solid var(--line-strong);border-radius:24px;background:var(--surface);
   padding:30px;box-shadow:0 50px 100px -50px rgba(0,0,0,1);
-  opacity:0;transform:translateY(12px) scale(.98);transition:opacity .45s var(--e-out),transform .55s var(--e-soft)}
-dialog.support.shown .support-box{opacity:1;transform:none}
+  opacity:0;transform:translateY(12px) scale(.98);transition:opacity .25s var(--e-out),transform .3s var(--e-out)}
+dialog.support.shown .support-box{opacity:1;transform:none;transition:opacity .45s var(--e-out),transform .55s var(--e-soft)}
 .support-box h3{font-size:22px}
 .support-box .note{margin-top:10px;color:var(--muted);font-size:14px}
 .support-list{margin-top:22px;display:grid;gap:10px}
@@ -476,6 +481,14 @@ dialog.support.shown .support-box{opacity:1;transform:none}
 .support-item b{display:block;font-size:14.5px}
 .support-item small{display:block;color:var(--dim);font-family:var(--mono);font-size:10.5px;margin-top:3px}
 .support-item .go{margin-left:auto;color:var(--acc-2)}
+/* значки площадок: фирменный цвет плитки и упрощённый знак, нарисованный здесь же (SVG в разметке) —
+   без картинок и без внешних запросов; сами лого сервисов не копируются */
+.support-item .ico.br-boosty{background:linear-gradient(135deg,#f15f2c,#ff8a4c)}
+.support-item .ico.br-patreon{background:linear-gradient(135deg,#f96854,#ff424d)}
+.support-item .ico.br-da{background:linear-gradient(135deg,#f57d07,#ffb02e)}
+.support-item .ico.br-tbank{background:linear-gradient(135deg,#ffdd2d,#fff07a)}
+.support-item .ico.br-ct{background:linear-gradient(135deg,#3d6bff,#6aa2ff)}
+.support-item .ico svg{display:block}
 .support-close{margin-top:22px;width:100%;padding:11px;border:1px solid var(--line);border-radius:12px;
   font-family:var(--mono);font-size:12px;color:var(--muted);transition:color var(--t-mid),border-color var(--t-mid)}
 .support-close:hover{color:#fff;border-color:var(--line-strong)}
@@ -486,15 +499,15 @@ dialog.support.shown .support-box{opacity:1;transform:none}
 dialog.project-modal{border:0;padding:0;background:transparent;width:min(940px,calc(100% - 32px));max-width:none;
   max-height:none;overflow:visible;color:var(--text)}
 dialog.project-modal::backdrop{background:rgba(6,7,10,.72);backdrop-filter:blur(12px);opacity:0;
-  transition:opacity .4s var(--e-out)}
-dialog.project-modal[open]::backdrop{opacity:1}
+  transition:opacity .25s var(--e-out)}
+dialog.project-modal.shown::backdrop{opacity:1;transition-duration:.4s}
 .project-modal-box{--pm-acc:#ff9a4d;position:relative;max-height:min(780px,calc(100dvh - 48px));
   overflow-x:hidden;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.16) transparent;
   overscroll-behavior:contain;
   border:1px solid color-mix(in srgb,var(--pm-acc) 26%,var(--line-strong));border-radius:26px;background:var(--surface);
   box-shadow:0 60px 120px -50px rgba(0,0,0,1),0 0 80px -40px color-mix(in srgb,var(--pm-acc) 45%,transparent);
-  opacity:0;transform:translateY(14px) scale(.98);transition:opacity .45s var(--e-out),transform .6s var(--e-soft)}
-dialog.project-modal.shown .project-modal-box{opacity:1;transform:none}
+  opacity:0;transform:translateY(14px) scale(.98);transition:opacity .25s var(--e-out),transform .3s var(--e-out)}
+dialog.project-modal.shown .project-modal-box{opacity:1;transform:none;transition:opacity .45s var(--e-out),transform .6s var(--e-soft)}
 .project-modal-box::before{content:"";position:absolute;left:0;right:0;top:0;height:340px;pointer-events:none;z-index:1;
   background:radial-gradient(460px 260px at 88% -12%,color-mix(in srgb,var(--pm-acc) 24%,transparent),transparent 70%)}
 .project-modal-close{position:absolute;top:16px;right:16px;z-index:3;width:38px;height:38px;border-radius:50%;
@@ -547,7 +560,7 @@ dialog.project-modal.shown .pm-cover img{transform:none}
   box-shadow:0 14px 34px -14px color-mix(in srgb,var(--pm-acc) 70%,transparent)}
 
 /* содержимое окна выходит по очереди при открытии */
-.pm-body>*{opacity:0;transform:translateY(10px)}
+.pm-body>*{opacity:0;transform:translateY(10px);transition:opacity .2s var(--e-out)}
 dialog.project-modal.shown .pm-body>*{opacity:1;transform:none;
   transition:opacity .5s var(--e-out) calc(.1s + var(--k,0) * .05s),transform .7s var(--e-soft) calc(.1s + var(--k,0) * .05s)}
 .pm-body>:nth-child(2){--k:1}

@@ -679,15 +679,21 @@
   /* ---------- диалоги: общий open/close, дальше только контент ---------- */
   function wireDialog(dlg) {
     if (!dlg) return null;
+    var closeTimer = null;
+    var CLOSE_MS = 320;   // чуть дольше самого долгого «закрывающего» перехода в style.css (.3s)
     var open = function (e) {
       if (e) e.preventDefault();
-      if (typeof dlg.showModal === 'function') dlg.showModal();
-      else dlg.setAttribute('open', '');
+      clearTimeout(closeTimer);                 // повторное открытие во время закрытия не должно быть закрыто «хвостом» таймера
+      if (!dlg.open) {
+        if (typeof dlg.showModal === 'function') dlg.showModal();
+        else dlg.setAttribute('open', '');
+      }
       requestAnimationFrame(function () { dlg.classList.add('shown'); });
     };
     var close = function () {
       dlg.classList.remove('shown');
-      setTimeout(function () { dlg.close ? dlg.close() : dlg.removeAttribute('open'); }, 260);
+      clearTimeout(closeTimer);
+      closeTimer = setTimeout(function () { dlg.close ? dlg.close() : dlg.removeAttribute('open'); }, CLOSE_MS);
     };
     $$('[data-close]', dlg).forEach(function (b) { b.addEventListener('click', close); });
     dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });

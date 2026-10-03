@@ -102,6 +102,15 @@
      «В разработке» — всё остальное (wip, soon, idea). */
   function groupOf(p) { return p.status === 'release' ? 'release' : 'wip'; }
 
+  /* Картинка проекта с запасным вариантом — только для показа, в content.js
+     фолбэк не пишется. Своя p.image (загруженная в Студии) полностью его заменяет.
+     release → logo-wide.png; wip/soon/idea → wip-paw.png (та же лапа, что уже рисует
+     .ac-cat-paw на WIP-карточке). */
+  var FALLBACK_IMG = { release: 'assets/img/logo-wide.png', wip: 'assets/img/wip-paw.png' };
+  function effectiveProjectImage(p) {
+    return p.image || FALLBACK_IMG[groupOf(p)];
+  }
+
   /* index — позиция проекта в DX.projects (по ней клик находит данные),
      pos — порядковый номер среди ВИДИМЫХ карточек (его и показываем) */
   function cardHTML(p, lang, index, pos) {
@@ -135,7 +144,8 @@
        (см. .ac-cat-paw/.ac-cat-noaccess в style.css) */
     var noise = cat === 'wip' ? '<span class="ac-cat-art-wrap"><span class="ac-cat-paw" aria-hidden="true"></span><span class="ac-cat-noaccess" aria-hidden="true"></span></span>' +
       '<span class="ac-noise" aria-hidden="true"></span><span class="ac-glitch-bar" aria-hidden="true"></span>' : '';
-    var img = p.image ? '<img class="ac-img" src="' + esc(p.image) + '" alt="" loading="lazy">' : '';
+    var img = p.image ? '<img class="ac-img" src="' + esc(p.image) + '" alt="" loading="lazy">' :
+      (cat === 'release' ? '<img class="ac-emblem" src="' + esc(effectiveProjectImage(p)) + '" alt="" loading="lazy">' : '');
     var inner = img +
       '<span class="ac-num">' + num2(pos + 1) + '</span>' +
       '<span class="ac-label">' + title + '</span>' +
@@ -709,6 +719,37 @@
   var projectDialog = wireDialog($('#projectModal'));
   var pmCurrent = null;
   var ACCENT_HEX = { o: '#ff9a4d', s: '#87a5b8', v: '#a894f5', g: '#66d5a0' };
+
+  /* ---------- ambient-фон «Проектов» ----------
+     Цвет свечений (--amb на #projects) — accent «текущего» проекта: карточки под
+     курсором или раскрытой, иначе первой видимой (с учётом фильтра). Само
+     свечение, дрейф и усиление при наведении (.amb-hot) — в style.css; пока
+     секция не на экране, анимация стоит (.live ставит IntersectionObserver). */
+  var projSection = $('#projects');
+  var ambBox = $('#projAmbient');
+  function syncAmbient() {
+    if (!projSection || !grid) return;
+    var cols = $$('.ac-col', grid).filter(function (c) { return currentFilter === 'all' || c.dataset.cat === currentFilter; });
+    var active = $('.ac-col:hover', grid) || $('.ac-col.open', grid);
+    var col = active || cols[0];
+    projSection.style.setProperty('--amb', col ? (ACCENT_HEX[col.dataset.accent] || (col.dataset.accent === 'd' ? '#c9ced6' : ACCENT_HEX.o)) : ACCENT_HEX.o);
+    projSection.classList.toggle('amb-hot', !!active);
+  }
+  if (projSection && ambBox && grid) {
+    syncAmbient();
+    ['mouseover', 'mouseleave', 'click', 'focusin', 'focusout'].forEach(function (ev) {
+      grid.addEventListener(ev, function () { setTimeout(syncAmbient, 0); });
+    });
+    document.addEventListener('langchange', syncAmbient);
+    $$('.f-btn').forEach(function (b) { b.addEventListener('click', function () { setTimeout(syncAmbient, 0); }); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { ambBox.classList.toggle('live', e.isIntersecting); });
+      }).observe(projSection);
+    } else {
+      ambBox.classList.add('live');
+    }
+  }
   var ARROW_SVG = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" ' +
     'stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>';
   var CHECK_SVG = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" ' +
@@ -725,9 +766,15 @@
     var d = p.details || {};
     var box = $('#projectModal .project-modal-box');
     box.style.setProperty('--pm-acc', /^#[0-9a-f]{6}$/i.test(d.color || '') ? d.color : (ACCENT_HEX[p.accent] || ACCENT_HEX.o));
-    var cover = d.layout === 'compact' ? '' : (d.cover || p.image || '');
+    var ownCover = d.cover || p.image || '';
+    var cover = d.layout === 'compact' ? '' : (d.cover || effectiveProjectImage(p));
+    var coverIsFallback = !!cover && !ownCover;
     box.classList.toggle('has-cover', !!cover);
-    $('#pmCover').innerHTML = cover ? '<img src="' + esc(cover) + '" alt="">' : '';
+    var coverEl = $('#pmCover');
+    coverEl.classList.toggle('pm-cover--fallback', coverIsFallback);
+    coverEl.innerHTML = !cover ? '' : coverIsFallback
+      ? '<img class="pm-emblem' + (groupOf(p) === 'release' ? '' : ' pm-emblem--paw') + '" src="' + esc(cover) + '" alt="">'
+      : '<img src="' + esc(cover) + '" alt="">';
     box.scrollTop = 0;
 
     var icon = $('#pmIcon');

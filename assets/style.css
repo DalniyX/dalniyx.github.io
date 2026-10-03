@@ -260,13 +260,15 @@ nav.links a.active::after{content:"";position:absolute;left:13px;right:13px;bott
 .ac-nav:hover{border-color:rgba(255,179,102,.5)}
 .ac-nav-prev{left:-16px}
 .ac-nav-next{right:-16px}
-.accordion .ac-col{position:relative;flex:1 1 0;min-width:74px;overflow:hidden;cursor:pointer;background:var(--surface);
+.accordion .ac-col{position:relative;isolation:isolate;flex:1 1 0;min-width:74px;overflow:hidden;cursor:pointer;background:var(--surface);
   transition:flex-grow .5s var(--e-soft),background var(--t-mid) var(--e-out),
     opacity var(--t-slow) var(--e-soft),transform var(--t-slow) var(--e-soft);
   /* .ac-col теперь всегда <button> (карточка открывает модалку, не ссылку) —
      сбрасываем стандартные стили кнопки браузера, дальше ведёт себя как раньше */
   display:block;width:100%;border:0;padding:0;font:inherit;text-align:left;color:inherit;
   -webkit-appearance:none;appearance:none}
+/* z-index:-1 — картинка под всем содержимым; isolation у .ac-col нужен, иначе она уходила бы ЗА фон самой колонки
+   (background:var(--surface)) и не была видна вообще */
 .accordion .ac-col .ac-img{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;
   filter:saturate(.65) brightness(.5);transition:filter .6s var(--e-out),transform 6s linear}
 .accordion .ac-col.has-img:hover .ac-img,.accordion .ac-col.has-img.open .ac-img{
@@ -416,6 +418,47 @@ nav.links a.active::after{content:"";position:absolute;left:13px;right:13px;bott
   92%,100%{filter:grayscale(.55);transform:translate(0,0) scale(1);opacity:.5}
 }
 
+/* ---------- ambient-фон секции «Проекты» ----------
+   Три больших мягких свечения цвета текущего проекта (--amb ставит app.js:
+   цвет карточки под курсором/раскрытой, иначе первой видимой). Очень низкая
+   плотность, медленный дрейф и «дыхание» (transform), при наведении на карточку
+   (#projects.amb-hot) свечение чуть плотнее. Ни частиц, ни новых объектов.
+   @property делает смену цвета плавной (там, где он не поддержан — меняется сразу).
+   Без движения при prefers-reduced-motion: общий сброс анимаций в конце файла. */
+@property --amb{syntax:'<color>';inherits:true;initial-value:#ff9a4d}
+#projects{--amb:#ff9a4d;transition:--amb 1.6s var(--e-soft)}
+.proj-ambient{position:absolute;inset:0;z-index:0;overflow:hidden;border-radius:inherit;pointer-events:none;--m:1}
+.proj-ambient i{position:absolute;display:block;border-radius:50%;
+  width:calc(var(--s,760px) * var(--m));height:calc(var(--s,760px) * var(--m));
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--amb) 30%,transparent),transparent);
+  opacity:.38;will-change:transform;transition:opacity 1.8s var(--e-soft)}
+.proj-ambient i:nth-child(1){--s:780px;left:-8%;top:-16%;animation:ambDriftA 28s ease-in-out infinite alternate}
+.proj-ambient i:nth-child(2){--s:900px;right:-14%;top:26%;animation:ambDriftB 36s ease-in-out infinite alternate}
+.proj-ambient i:nth-child(3){--s:700px;left:24%;bottom:-38%;opacity:.3;animation:ambDriftC 31s ease-in-out infinite alternate}
+.proj-ambient:not(.live) i{animation-play-state:paused}
+#projects.amb-hot .proj-ambient i{opacity:.55}
+#projects.amb-hot .proj-ambient i:nth-child(3){opacity:.44}
+#projects>.wrap{position:relative;z-index:1}
+@keyframes ambDriftA{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(7%,9%,0) scale(1.14)}}
+@keyframes ambDriftB{from{transform:translate3d(0,0,0) scale(1.08)}to{transform:translate3d(-8%,-7%,0) scale(.94)}}
+@keyframes ambDriftC{from{transform:translate3d(0,0,0) scale(.94)}to{transform:translate3d(9%,-6%,0) scale(1.12)}}
+@media(max-width:680px){.proj-ambient{--m:.55}}
+
+/* карточка проекта без своей картинки (релиз): вместо пустоты — логотип-эмблема
+   справа (слева остаётся место под текст раскрытой карточки). Это только визуальный
+   фолбэк из app.js (effectiveProjectImage), в content.js ничего не пишется. У WIP-карточек
+   такую роль уже играет лапа .ac-cat-paw — второй раз её не рисуем. */
+.accordion .ac-col .ac-emblem{position:absolute;z-index:0;top:44%;right:50%;translate:50% -50%;
+  width:min(64%,300px);height:auto;pointer-events:none;opacity:.5;filter:saturate(.75) drop-shadow(0 10px 26px rgba(0,0,0,.55));
+  transition:right .7s var(--e-soft),translate .7s var(--e-soft),width .7s var(--e-soft),opacity .7s var(--e-soft)}
+/* в покое — по центру колонки (как лапа у WIP), при наведении/раскрытии уходит вправо,
+   освобождая место тексту */
+.accordion .ac-col:hover .ac-emblem,.accordion .ac-col.open .ac-emblem{right:7%;translate:0 -50%;width:min(46%,300px);opacity:.9}
+@media(max-width:680px){
+  .accordion .ac-col .ac-emblem{width:min(40%,150px)}
+  .accordion .ac-col:hover .ac-emblem,.accordion .ac-col.open .ac-emblem{right:50%;translate:50% -50%;width:min(40%,150px);opacity:0}
+}
+
 /* ---------- модалка поддержки ---------- */
 dialog.support{border:0;padding:0;background:transparent;max-width:min(460px,calc(100% - 32px));color:var(--text)}
 dialog.support::backdrop{background:rgba(6,7,10,.7);backdrop-filter:blur(10px);opacity:0;transition:opacity .4s var(--e-out)}
@@ -440,7 +483,7 @@ dialog.support.shown .support-box{opacity:1;transform:none}
 /* ---------- модалка проекта ----------
    --pm-acc — цвет проекта (Студия → «Цвет окна», иначе цвет иконки),
    выставляется из app.js; от него рамка, свечение, галочки и кнопка. */
-dialog.project-modal{border:0;padding:0;background:transparent;width:min(860px,calc(100% - 32px));max-width:none;
+dialog.project-modal{border:0;padding:0;background:transparent;width:min(940px,calc(100% - 32px));max-width:none;
   max-height:none;overflow:visible;color:var(--text)}
 dialog.project-modal::backdrop{background:rgba(6,7,10,.72);backdrop-filter:blur(12px);opacity:0;
   transition:opacity .4s var(--e-out)}
@@ -466,9 +509,21 @@ dialog.project-modal.shown .project-modal-box{opacity:1;transform:none}
   transition:transform 1.4s var(--e-soft)}
 dialog.project-modal.shown .pm-cover img{transform:none}
 .pm-cover::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(17,19,25,.1) 30%,var(--surface) 98%)}
+  background:linear-gradient(180deg,rgba(17,19,25,.04) 20%,rgba(17,19,25,.6) 56%,rgba(17,19,25,.93) 84%,var(--surface) 100%)}
+/* проект без своей обложки: цветной фон из цвета проекта + эмблема (logo-wide / лапа) по центру —
+   тот же слой .pm-cover, так что открытие, градиент снизу и наезд заголовка те же, что у обложки */
+.pm-cover--fallback{background:
+  radial-gradient(70% 115% at 50% 0%,color-mix(in srgb,var(--pm-acc) 30%,transparent),transparent 72%),
+  radial-gradient(46% 80% at 6% 100%,color-mix(in srgb,var(--pm-acc) 15%,transparent),transparent 72%),
+  radial-gradient(40% 70% at 96% 80%,color-mix(in srgb,var(--pm-acc) 12%,transparent),transparent 72%),
+  linear-gradient(180deg,#0e1015,#12141a)}
+.pm-cover--fallback{aspect-ratio:16/5.4}
+.pm-cover .pm-emblem{position:absolute;left:50%;top:40%;translate:-50% -50%;width:min(50%,380px);height:auto;
+  max-height:58%;object-fit:contain;filter:drop-shadow(0 14px 30px rgba(0,0,0,.5))}
+.pm-cover .pm-emblem--paw{width:min(24%,180px);opacity:.8;filter:grayscale(.35) drop-shadow(0 14px 30px rgba(0,0,0,.5))}
 .pm-body{position:relative;z-index:2;padding:40px 46px 44px}
-.has-cover .pm-body{margin-top:-64px;padding-top:0}
+.has-cover .pm-body{margin-top:-108px;padding-top:0}
+.has-cover .project-modal-title{text-shadow:0 2px 26px rgba(0,0,0,.45)}
 
 .project-modal-head{display:flex;align-items:center;gap:12px;padding-right:44px}
 .project-modal-title{margin:18px 0 0;font-size:clamp(2rem,4.4vw,2.8rem);letter-spacing:-.035em;line-height:1}
@@ -503,7 +558,8 @@ dialog.project-modal.shown .pm-body>*{opacity:1;transform:none;
 .pm-body>:nth-child(7){--k:6}
 @media(max-width:560px){
   .pm-body{padding:28px 22px 26px}
-  .has-cover .pm-body{margin-top:-40px}
+  .has-cover .pm-body{margin-top:-60px}
+  .pm-cover{aspect-ratio:16/9}
   .pm-features{grid-template-columns:1fr}
 }
 

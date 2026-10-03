@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DalniyX — независимый разработчик</title>
-<meta name="description" content="DalniyX — независимый разработчик. Небольшие приложения для тех, кто создаёт истории.">
+<meta name="description" content="DalniyX — независимый разработчик. Небольшие приложения и эксперименты, которые решают реальные задачи и которыми мне самому хочется пользоваться.">
 <meta name="theme-color" content="#08090c">
 <!-- Превью ссылки (Telegram, VK, Discord…). Адреса картинки и страницы обязаны быть
      абсолютными; если сайт переедет на свой домен — поменять dalniyx.github.io здесь
      и в строках canonical/og:url. Сама картинка — assets/img/og-image.jpg, 1200×630. -->
 <link rel="canonical" href="https://dalniyx.github.io/">
 <meta property="og:title" content="DalniyX — независимый разработчик">
-<meta property="og:description" content="Небольшие приложения для тех, кто создаёт истории.">
+<meta property="og:description" content="Небольшие приложения и эксперименты, которые решают реальные задачи и которыми мне самому хочется пользоваться.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DalniyX">
 <meta property="og:url" content="https://dalniyx.github.io/">
@@ -30,7 +30,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon-64.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/style.css?v=20261002c">
+<link rel="stylesheet" href="assets/style.css?v=20261002e">
 <script>setTimeout(function(){document.documentElement.classList.add("ready")},1500);</script>
 <style>
   /* стили, нужные только главной */
@@ -188,7 +188,7 @@
   <div class="wrap hero-copy" id="heroCopy">
     <h1 class="title">
       <span class="grad">Dalniy</span><span class="x">X</span>
-      <span class="title-sub grad" data-t="home.titleSub">Небольшие приложения<br>для тех, кто создаёт истории.</span>
+      <span class="title-sub grad" data-t="home.titleSub">Программы, которые я делаю сам —<br>от идеи до релиза.</span>
     </h1>
   </div>
 
@@ -208,12 +208,15 @@
 
 <!-- ============ 03 · ПРОЕКТЫ ============ -->
 <section class="slide slide--soft" id="projects" data-label="Проекты" data-label-en="Projects">
+  <!-- ambient: три больших мягких свечения цвета текущего проекта, едва заметно «дышат»;
+       цвет (--amb) выставляет app.js, движение и яркость — .proj-ambient в style.css -->
+  <div class="proj-ambient" id="projAmbient" aria-hidden="true"><i></i><i></i><i></i></div>
   <div class="wrap" data-scrub>
     <div class="sec-head">
       <div>
         <p class="eyebrow rv"><b>02</b> &nbsp;/&nbsp; <span data-t="home.pr.eyebrow">проекты</span></p>
-        <h2 class="grad rv" data-t="home.pr.h2">Что я делаю</h2>
-        <p class="sub rv" data-t="home.pr.sub">Готовые проекты живут на собственных страницах — с описанием, сборками и историей версий. Остальные пока в работе: покажу, как только будет что показывать.</p>
+        <h2 class="grad rv" data-t="home.pr.h2">Что я строю</h2>
+        <p class="sub rv" data-t="home.pr.sub">Готовые проекты — с подробностями. Остальные появляются здесь по мере того, как превращаются из идеи в работающий продукт.</p>
       </div>
       <div class="filters rv">
         <button class="f-btn on" data-f="all" data-t="home.f.all">Все</button>
@@ -240,12 +243,8 @@
   <div class="wrap about-grid" data-scrub>
     <div>
       <p class="eyebrow rv"><b>03</b> &nbsp;/&nbsp; <span data-t="home.ab.eyebrow">обо мне</span></p>
-      <h2 class="grad rv" style="margin-top:12px;font-size:clamp(2rem,4.2vw,2.8rem)" data-t="home.ab.h2">Один разработчик<br>и понятные правила.</h2>
-      <p class="rv" style="margin-top:22px;font-size:15.5px;line-height:1.75;color:var(--muted)" data-t="home.ab.p1">
-        Я делаю софт, которым пользуюсь сам — в одиночку, без команды и инвесторов.
-        Каждый проект остаётся обычной папкой на вашем диске: работает без интернета
-        и не использует встроенную аналитику и трекеры, а версии выходят с честным списком изменений.
-      </p>
+      <h2 class="grad rv" style="margin-top:12px;font-size:clamp(2rem,4.2vw,2.8rem)" data-t="home.ab.h2">Делаю сам.<br>Пользуюсь сам.</h2>
+      <p class="rv" style="margin-top:22px;font-size:15.5px;line-height:1.75;color:var(--muted)" data-t="home.ab.p1">Я придумываю, собираю, тестирую и поддерживаю свои проекты сам. Мне важны простые интерфейсы, локальная работа и программы, которые не усложняют задачу сильнее, чем она того требует.</p>
 
       <div class="tags rv">
         <span class="tag">Python</span>
@@ -264,19 +263,19 @@
     <div class="steps">
       <div class="card rv"><div class="card-in">
         <span class="n">01</span><h3 data-t="home.s1.t">Идея</h3>
-        <p data-t="home.s1.p">Своя боль → короткое описание в заметках → набросок интерфейса.</p>
+        <p data-t="home.s1.p">Нахожу задачу, которой самому не хватает хорошего решения.</p>
       </div></div>
       <div class="card rv"><div class="card-in">
         <span class="n">02</span><h3 data-t="home.s2.t">Прототип</h3>
-        <p data-t="home.s2.p">Собираю рабочую версию за пару недель и живу в ней каждый день.</p>
+        <p data-t="home.s2.p">Собираю первую рабочую версию и начинаю пользоваться ей сразу.</p>
       </div></div>
       <div class="card rv"><div class="card-in">
         <span class="n">03</span><h3 data-t="home.s3.t">Полировка</h3>
-        <p data-t="home.s3.p">Горячие клавиши, анимации и мелочи, ради которых хочется вернуться.</p>
+        <p data-t="home.s3.p">Убираю лишнее и довожу детали, которые делают программу приятной в работе.</p>
       </div></div>
       <div class="card rv"><div class="card-in">
         <span class="n">04</span><h3 data-t="home.s4.t">Релиз</h3>
-        <p data-t="home.s4.p">Страница проекта, сборки, changelog и ответы на обратную связь.</p>
+        <p data-t="home.s4.p">Публикую готовое, поддерживаю его и продолжаю развивать по обратной связи.</p>
       </div></div>
     </div>
   </div>
@@ -288,12 +287,8 @@
     <div class="final rv">
       <img class="final-mug" src="assets/img/support-mug.png" alt="" aria-hidden="true">
       <p class="eyebrow"><b>04</b> &nbsp;/&nbsp; <span data-t="home.fin.eyebrow">дальше</span></p>
-      <h2 class="grad" data-t="home.fin.h2">Написать или поддержать</h2>
-      <p class="sub" data-t="home.fin.sub">
-        Все приложения бесплатные и без рекламы. Если они пригодились — поддержка
-        превращается в новые вечера за кодом. А если что-то сломалось или не хватает
-        функции, просто напишите: отвечаю сам.
-      </p>
+      <h2 class="grad" data-t="home.fin.h2">Есть идея или вопрос?</h2>
+      <p class="sub" data-t="home.fin.sub">Нашли баг, хотите предложить функцию или просто посмотреть, над чем я работаю — напишите. Проекты остаются бесплатными, а поддержка превращается в дополнительное время на разработку.</p>
 
       <div class="final-row">
         <button class="btn btn-primary" data-support>
@@ -319,7 +314,7 @@
 <footer>
   <div class="wrap site-foot">
     <div style="display:flex;align-items:center;gap:11px">
-      <span>© <span data-year></span> DalniyX. <span data-t="footer.copy">Сделано вручную.</span></span>
+      <span>© <span data-year></span> DalniyX</span>
     </div>
     <div class="links">
       <a href="#projects" data-t="nav.projects">Проекты</a>
@@ -395,8 +390,8 @@
   </div>
 </dialog>
 
-<script src="assets/content.js?v=20261002c" defer></script>
-<script src="assets/i18n.js?v=20261002c" defer></script>
-<script src="assets/app.js?v=20261002c" defer></script>
+<script src="assets/content.js?v=20261002e" defer></script>
+<script src="assets/i18n.js?v=20261002e" defer></script>
+<script src="assets/app.js?v=20261002e" defer></script>
 </body>
 </html>

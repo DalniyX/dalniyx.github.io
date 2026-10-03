@@ -1,6 +1,6 @@
 /* ============================================================
    DalniyX — данные сайта: ссылки, карточки проектов и все тексты.
-   Файл целиком генерируется Студией (studio/studio.py).
+   Файл целиком генерируется Студией (папка studio/).
    Внутри строгий JSON — правьте через Студию либо очень аккуратно руками.
    ============================================================ */
 window.DX = {
@@ -11,7 +11,20 @@ window.DX = {
     "snow": false,
     "snowFrom": "",
     "snowTo": "",
-    "showSupport": true
+    "showSupport": true,
+    "cardDefaults": {
+      "cardStyle": "accordion",
+      "releaseFallback": "logo",
+      "wipFallback": "paw",
+      "effects": {
+        "noise": true,
+        "glitch": true,
+        "noAccess": true,
+        "ambient": true,
+        "autoAccent": true
+      },
+      "imageMode": "brand"
+    }
   },
   "links": {
     "github": "https://github.com/dalniyx",
@@ -214,7 +227,7 @@ window.DX = {
         "secondaryUrl": ""
       },
       "titleEn": "Project 03",
-      "hidden": false
+      "hidden": true
     },
     {
       "id": "p4",
@@ -392,5 +405,6 @@ window.DX = {
       "pm.open": "Go to the project's website",
       "home.ogDesc": "Small apps and experiments that solve real problems — and that I actually want to use myself."
     }
-  }
+  },
+  "news": []
 };

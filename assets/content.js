@@ -406,5 +406,78 @@ window.DX = {
       "home.ogDesc": "Small apps and experiments that solve real problems — and that I actually want to use myself."
     }
   },
-  "news": []
+  "news": [
+    {
+      "id": "news-mut10jcn",
+      "type": "release",
+      "date": "2026-10-03",
+      "projectId": "narrata",
+      "version": "",
+      "cover": "",
+      "hidden": true,
+      "title": {
+        "ru": "Narrata 1.1",
+        "en": "Narrata 1.1"
+      },
+      "excerpt": {
+        "ru": "",
+        "en": ""
+      },
+      "body": {
+        "ru": "",
+        "en": ""
+      },
+      "cta": {
+        "label": {
+          "ru": "Подробнее",
+          "en": "Read more"
+        },
+        "url": "",
+        "newTab": true
+      },
+      "secondary": {
+        "label": {
+          "ru": "",
+          "en": ""
+        },
+        "url": ""
+      }
+    },
+    {
+      "id": "news-mut11yv7",
+      "type": "note",
+      "date": "2026-10-03",
+      "projectId": "",
+      "version": "",
+      "cover": "",
+      "hidden": false,
+      "title": {
+        "ru": "Начал новый проект",
+        "en": "Начал новый проект"
+      },
+      "excerpt": {
+        "ru": "",
+        "en": ""
+      },
+      "body": {
+        "ru": "",
+        "en": ""
+      },
+      "cta": {
+        "label": {
+          "ru": "Подробнее",
+          "en": "Read more"
+        },
+        "url": "",
+        "newTab": true
+      },
+      "secondary": {
+        "label": {
+          "ru": "",
+          "en": ""
+        },
+        "url": ""
+      }
+    }
+  ]
 };
